@@ -34,6 +34,7 @@ require_once('connections.php');
 <div class='container'>
 <?php require_once('design-parts/meniu.php'); ?>
 <?php 
+
 if(!isset($_COOKIE["prisijungti"])) { 
     header("Location: index.php");    
 } else {
@@ -41,10 +42,10 @@ if(!isset($_COOKIE["prisijungti"])) {
     $cookie_array = explode("|", $cookie_text );
     $cookie_vardas = $cookie_array[1];
     $cookie_teises = $cookie_array[3];
-    echo "Sveikas prisijunges: ".$cookie_vardas;
+    echo "Sveikas prisijunges: ".$cookie_vardas.'<br>';
 
     if($cookie_teises == 2) {
-        header('Location: index.php')
+        header('Location: index.php');
     }
     // echo "<form action='klientai.php' method ='get'>";
     // // echo "<button class='btn btn-primary' type='submit' name='vartotojai'>Vartotojų duomenų bazė</button>";
@@ -61,8 +62,11 @@ if(!isset($_COOKIE["prisijungti"])) {
     // if(isset($_GET["logout"])) {
     //     setcookie("prisijungti", "", time() - 3600, "/");
     //     header("Location: login.php");
-    // }
-}    
+   
+
+}
+ 
+  
 ?>
 
 <?php 
@@ -104,9 +108,9 @@ if(isset($_GET["submit"])) {
             if(mysqli_query($conn, $sql)) {
             $message =  "Puslapis redaguotas sėkmingai";
             $class = "success";
-            echo $pavadinimas;
-            echo $nuoroda;
-            echo $kategorijos_id;
+            echo 'Puslapis: '.$pavadinimas.', redaguotas sėkmingai'.'<br>';
+            // echo $nuoroda;
+            echo 'Kategorija: '.$kategorijos_id;
 
         } else {
             $message =  "Kazkas ivyko negerai";

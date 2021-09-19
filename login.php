@@ -44,7 +44,7 @@ if($result->num_rows == 1)  {
         $user_info["slapyvardis"],
         $user_info["vardas"],
         $user_info["teises_id"],
-        $user_info['Registracija']
+        $user_info['registracija'],
         
                 
     );
@@ -58,7 +58,12 @@ if($result->num_rows == 1)  {
     $slaptazodis = $user_info['slaptazodis'];
     $data = date("Y.m.d");
     $id = $user_info["ID"];
-    $registracija = $user_info['Registracija'];
+    $registracija = $user_info['registracija'];
+
+    $sql = "UPDATE `vartotojai`
+    SET `paskutinis_prisijungimas` = '$data'
+    WHERE ID = $id";
+    $result = $conn->query($sql);
 
     
     
