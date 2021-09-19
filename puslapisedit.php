@@ -35,12 +35,17 @@ require_once('connections.php');
 <?php require_once('design-parts/meniu.php'); ?>
 <?php 
 if(!isset($_COOKIE["prisijungti"])) { 
-    header("Location: login.php");    
+    header("Location: index.php");    
 } else {
     $cookie_text = $_COOKIE["prisijungti"];
     $cookie_array = explode("|", $cookie_text );
     $cookie_vardas = $cookie_array[1];
+    $cookie_teises = $cookie_array[3];
     echo "Sveikas prisijunges: ".$cookie_vardas;
+
+    if($cookie_teises == 2) {
+        header('Location: index.php')
+    }
     // echo "<form action='klientai.php' method ='get'>";
     // // echo "<button class='btn btn-primary' type='submit' name='vartotojai'>Vartotojų duomenų bazė</button>";
     // // echo "<button class='btn btn-primary' type='submit' name='imones'>Imonių duomenų bazė</button>";
@@ -91,11 +96,12 @@ if(isset($_GET["submit"])) {
         $santrauka = $_GET['santrauka'];
         $kategorijos_id = $_GET["kategorijos_id"];
 
+
         $sql = "UPDATE `puslapiai` 
-        SET `pavadinimas`='$pavadinimas',`nuoroda`='$nuoroda',`turinys`='$turinys', `santrauka`='$santrauka', `kategorijos_id`='$kategorijos_id' 
+        SET `pavadinimas`='$pavadinimas', `nuoroda`='$nuoroda', `turinys`='$turinys', `santrauka`='$santrauka', `kategorijos_id`='$kategorijos_id'
         WHERE ID = $id";
 
-        if(mysqli_query($conn, $sql)) {
+            if(mysqli_query($conn, $sql)) {
             $message =  "Puslapis redaguotas sėkmingai";
             $class = "success";
             echo $pavadinimas;
@@ -115,8 +121,10 @@ if(isset($_GET["submit"])) {
         $kategorijos_id = $page['kategorijos_id'];
 
         $sql = "UPDATE `puslapiai`
-        SET `pavadinimas`='$pavadinimas',`nuoroda`='$nuoroda',`turinys`=$turinys, `santrauka`='$santrauka', `kategorijos_id`='$kategorijos_id',
+        SET `pavadinimas`='$pavadinimas', `nuoroda`='$nuoroda', `turinys`='$turinys', `santrauka`='$santrauka', `kategorijos_id`='$kategorijos_id'
         WHERE ID = $id";
+
+    
         if(mysqli_query($conn, $sql)) {
             $message =  "Puslapis redaguotas sėkmingai";
             $class = "success";
@@ -175,10 +183,10 @@ if(isset($_GET["submit"])) {
                      
                          while($kategorijos = mysqli_fetch_array($result)) {
 
-                            if($puslapiai['kategorijos_id']== $kategorijos["pavadinimas"] ) {
-                                echo "<option value='".$kategorijos["pavadinimas"]."' selected='true'>";
+                            if($puslapiai['kategorijos_id']== $kategorijos["ID"] ) {
+                                echo "<option value='".$kategorijos["ID"]."' selected='true'>";
                             }  else {
-                                echo "<option value='".$kategorijos["pavadinimas"]."'>";
+                                echo "<option value='".$kategorijos["ID"]."'>";
                             }  
                                 
                                 echo $kategorijos["pavadinimas"];

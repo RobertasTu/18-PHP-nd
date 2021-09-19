@@ -36,7 +36,7 @@
                     <p class="card-text"><?php echo $pages["santrauka"]; ?></p>
                     <a href="puslapiai.php?href=<?php echo $pages["nuoroda"]; ?>" class="btn btn-primary">Go somewhere</a>
                     <?php if ($cookie_teises_id==1) { 
-                    echo "<a href='puslapisedit.php?ID=".$pages["ID"]."'>Edit</a>";
+                    echo "<a style='color:red;' href='puslapisedit.php?ID=".$pages["ID"]."'>Edit</a>";
                     } ?>
                 </div>
             </div>
