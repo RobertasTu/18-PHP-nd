@@ -77,13 +77,13 @@ if(isset($_GET['ID'])) {
 }
 
 if(isset($_GET["submit"])) {
-    if(isset($_GET["pavadinimas"]) && isset($_GET["nuoroda"]) && isset($_GET["aprasymas"]) && isset($_GET["tevinis_id"]) && isset($_GET["rodyti"]) && !empty($_GET["pavadinimas"]) && !empty($_GET["nuoroda"]) && !empty($_GET["kategorijos_id"])) {
+    if(isset($_GET["pavadinimas"]) && isset($_GET["nuoroda"]) && isset($_GET["aprasymas"]) && isset($_GET["kategorijos_id"]) && !empty($_GET["pavadinimas"]) && !empty($_GET["nuoroda"]) && !empty($_GET["kategorijos_id"])) {
         $id = $_GET["ID"];
         $pavadinimas = $_GET["pavadinimas"];
         $nuoroda = $_GET["nuoroda"];
         $aprasymas = $_GET['aprasymas'];
-        $tevinis_id = $_GET['tevinis_id'];
-        $rodyti = $_GET["rodyti"];
+        $tevinis_id = $_GET['kategorijos_id'];
+//        $rodyti = $_GET["rodyti"];
 
 
         $sql = "UPDATE `kategorijos` 
@@ -98,7 +98,7 @@ if(isset($_GET["submit"])) {
             $class = "success";
             echo 'Kategorija: '.$pavadinimas.', redaguota sėkmingai'.'<br>';
             // echo $nuoroda;
-            echo 'Kategorija: '.$kategorijos_id;
+            echo 'Kategorija: '.$tevinis_id;
 
         } else {
             $message =  "Kazkas ivyko negerai";
@@ -161,7 +161,7 @@ if(isset($_GET["submit"])) {
     </textarea>
 </div>
 <div class='form-group'>
-        <label for='tevinis_id'>Tevinis_id</label>
+        <label for='kategorijos_id'>Tevinis_id</label>
        
                     <select class="form-control" name="kategorijos_id">
                         <?php 

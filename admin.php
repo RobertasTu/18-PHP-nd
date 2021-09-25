@@ -83,10 +83,12 @@
         ?>
          <a class='btn btn-primary' href='index.php'>Į pagrindinį puslapį</a>
 
-        <h2>Kategoriju atvaizdavimas</h2>
+        <h2>Kategorijų atvaizdavimas</h2>
         <form action="admin.php" method="get">
        
             <table class="table table-striped">
+                <?php  
+                    echo "<a href=categorynew.php class='btn btn-primary'>Prideti naują kategoriją</a>";?>
                 <tr>
                     <th>ID</th>
                     <th>Pavadinimas</th>
@@ -116,7 +118,10 @@
                         
                     }
                     
-                    echo "<td><a style='color:red;' href='categoryedit.php?ID=".$category["ID"]."'>Edit</a></td>";
+                    echo "<td>";
+                    echo "<a style='color:red;' href='categoryedit.php?ID=".$category["ID"]."'>Edit</a>";
+                   
+                    echo "</td>";
 
                     
                 echo "</tr>";
