@@ -69,7 +69,7 @@ if($result->num_rows == 1)  {
     
 
     if($teises_id == 1) {
-      header('Location: index.php');       
+      header('Location: admin.php');       
     }
    
     if($teises_id == 2) {

@@ -19,7 +19,9 @@
         
         <?php showJumbotron('Index', 'Welcome'); ?>
         <?php if(isset($_COOKIE["prisijungti"])) { ?>
+            <a class='btn btn-primary' href='admin.php'>Į puslapio redagavimą</a><br>
         <?php require_once("design-parts/main.php"); ?>
+        
 
 <?php } ?>
     </div>

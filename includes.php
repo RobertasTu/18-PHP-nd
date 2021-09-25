@@ -12,5 +12,7 @@ echo '
 
 <link href="summernote/summernote.min.css" rel="stylesheet">
 <script src="summernote/summernote.min.js"></script>  
+
+<link rel="stylesheet" href="assets/css/style.css">
 ';
 ?>
