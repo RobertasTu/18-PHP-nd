@@ -117,6 +117,7 @@ if(isset($_GET["prideti"])) {
 <div class='form-group'>
         <label for='tevinis_id'>Tėvinis_id</label>
         <select class='form-control' type='text' required='true' name='tevinis_id'  >
+                        <option value='0'>Nuline</option>
                          <?php 
                          $sql = "SELECT * FROM kategorijos";
                          $result = $conn->query($sql);
@@ -125,6 +126,7 @@ if(isset($_GET["prideti"])) {
 
                             if($category['tevinis_id']== $category["ID"] ) {
                                 echo "<option value='".$category["ID"]."' selected='true'>";
+                                                                
                             }  else {
                                 echo "<option value='".$category["ID"]."'>";
                             }  
