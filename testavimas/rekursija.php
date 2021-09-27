@@ -131,12 +131,12 @@ foreach($kategorijos as $kategorija) {
 <!-- Medzio atvaizdavimai -->
 <ul>
     <li>Kategorija 1</li>
-    <li>Katgeroija 2
+    <li>Kategorija 2
         <ul>
             <li>Kategorija4</li>
         </ul>
     </li>
-    <li>Katgeroija 3
+    <li>Kategorija 3
         <ul>
             <li>
                 

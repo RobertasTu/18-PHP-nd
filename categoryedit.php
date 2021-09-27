@@ -85,6 +85,10 @@ if(isset($_GET["submit"])) {
         $tevinis_id = $_GET['kategorijos_id'];
 //        $rodyti = $_GET["rodyti"];
 
+        if($tevinis_id == 900) {
+            $tevinis_id="0";
+        }
+
 
         $sql = "UPDATE `kategorijos` 
         SET `pavadinimas` = '$pavadinimas', `nuoroda`='$nuoroda', `aprasymas`='$aprasymas', `tevinis_id`='$tevinis_id'
@@ -164,20 +168,26 @@ if(isset($_GET["submit"])) {
         <label for='kategorijos_id'>Tevinis_id</label>
        
                     <select class="form-control" name="kategorijos_id">
+                        <option value="900">Nepriskirta</option>
                         <?php 
-                         $sql = "SELECT * FROM kategorijos";
+                        //  $sql = "SELECT * FROM kategorijos WHERE NOT ID=$id";
+                        $sql = "SELECT * FROM kategorijos";
                          $result = $conn->query($sql);
                      
                          while($category = mysqli_fetch_array($result)) {
 
-                            if($category['tevinis_id']== $category["ID"] ) {
-                                echo "<option value='".$category["ID"]."' selected='true'>";
-                            }  else {
-                                echo "<option value='".$category["ID"]."'>";
-                            }  
-                                
-                                echo $category["pavadinimas"];
-                            echo "</option>";
+                            //PHP ifa
+                            //SQL uzklausa
+                            if($category["ID"]!= $id) {        
+                                if($category['tevinis_id']== $category["ID"] ) {
+                                    echo "<option value='".$category["ID"]."' selected='true'>";
+                                }  else {
+                                    echo "<option value='".$category["ID"]."'>";
+                                }  
+                                    
+                                    echo $category["pavadinimas"];
+                                echo "</option>";
+                            }
                         }
                         ?>
                     </select>

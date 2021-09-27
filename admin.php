@@ -81,7 +81,7 @@
         }
 
         ?>
-         <a class='btn btn-primary' href='index.php'>Į pagrindinį puslapį</a>
+         <!-- <a class='btn btn-primary' href='index.php'>Į pagrindinį puslapį</a> -->
 
         <h2>Kategorijų atvaizdavimas</h2>
         <form action="admin.php" method="get">
