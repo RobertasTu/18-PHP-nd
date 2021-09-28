@@ -68,7 +68,7 @@ $selected_value = mysqli_fetch_array($result);
             while($pages = mysqli_fetch_array($result)) {
             ?>
             <div class="card col-lg-4" style="width: 18rem;">
-                <img class="card-img-top" src="https://media.istockphoto.com/photos/camera-and-lens-zoom-closeup-picture-id1152344841?s=612x612" alt="Card image cap">
+                <img class="card-img-top" src="https://static.turbosquid.com/Preview/2020/07/09__14_55_47/fut_sport_car_0000.jpg28A381E8-702F-4473-81A6-65CD780F349DZoom.jpg" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $pages["pavadinimas"]; ?></h5>
                     <p class="card-text"><?php echo $pages["santrauka"]; ?></p>
