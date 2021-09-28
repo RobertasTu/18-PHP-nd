@@ -60,7 +60,7 @@
             <input class="btn btn-primary" type="submit" name="submit" value="Išsaugoti">
         </form>
         
-        <?php 
+        <?php
         // 0 reiks kad sidebar neatvaizduojamas
         // 1 reiks kad sidebar yra kaireje puseje
         // 2 reiks kad sidebar yra desineje puseje
@@ -73,6 +73,8 @@
 
             if($result) {
                 echo "Nustatymas pakeistas sėkmingai";
+                // Redirect("admin.php");
+                // header("Location: admin.php");
                 echo "<script type='text/javascript'>window.top.location='admin.php';</script>";
             } else {
                 echo "Kažkas įvyko negerai";
@@ -81,21 +83,15 @@
         }
 
         ?>
-         <!-- <a class='btn btn-primary' href='index.php'>Į pagrindinį puslapį</a> -->
 
-        <h2>Kategorijų atvaizdavimas</h2>
+        <h2> Kategoriju atvaizdavimas </h2>
         <form action="admin.php" method="get">
-       
             <table class="table table-striped">
-                <?php  
-                    echo "<a href=categorynew.php class='btn btn-primary'>Prideti naują kategoriją</a>";?>
                 <tr>
                     <th>ID</th>
                     <th>Pavadinimas</th>
                     <th>Aprasymas</th>
                     <th>Rodyti</th>
-                    <th>Veiksmai</th>
-
                 </tr>
             <?php
             $sql = "SELECT * FROM kategorijos"; //kuri kategorija yra tevine/ kuri vaikine
@@ -117,51 +113,89 @@
                         </td>";
                         
                     }
-                    
-                    echo "<td>";
-                    echo "<a style='color:red;' href='categoryedit.php?ID=".$category["ID"]."'>Edit</a>";
-                   
-                    echo "</td>";
 
                     
                 echo "</tr>";
 
             }
+            
+            ?>
+            </table>
+            <input type="submit" name="submit1" value="Išsaugoti"/>
+        </form>
+
+        <?php 
+        if(isset($_GET["submit1"])) {
+
+            // 1 atvaizduoja 0 paslepia
+            //jeigu egzistuoja masyve, vadinasi checkobx pazymeta, vadinasi turi buti 1
+            //jeigu masyve neegzistuoja, vadinasi checkbox kategorija nepazymeta, vadinasi turi buti 0
+            $reiksmes = $_GET["category"];
+            var_dump($reiksmes);
+
+
+            $sql = "UPDATE `kategorijos` SET `rodyti`= 0";
+            $result = $conn->query($sql);
+
+            foreach ($reiksmes as $reiksme) {
+                $sql = "UPDATE `kategorijos` SET `rodyti`= 1 WHERE ID=$reiksme";
+                $result = $conn->query($sql);
+            }
+
+            // header("Location: admin.php");
+            echo "<script type='text/javascript'>window.top.location='admin.php';</script>";
+
+        }
         
         ?>
-    </table>
-    <input class="btn btn-primary"  type='submit' name='submit1'><br>
-    
-    </div>
-    </form>
+
+        <h2> Kategoriju dropdown atvaizdavimas </h2>
+
+        <form action="admin.php" method="get">
             <?php 
-                if(isset($_GET['submit1'])) {
-                        //1 atvaizduoja 0 paslepia
-                        //jeigu egzistuoja masyve, vadinas checkbox pazymeta, vadinasi turi buti 1
-                        //Jei masyve neegzistuoja, vadinas checkbox kategorija nepazymeta, vadinasi tb 0
 
+            $sql = "SELECT reiksme FROM nustatymai WHERE ID = 3 "; // 1 irasas
+            $result = $conn->query($sql);
 
-                    $reiksmes = $_GET['category'];
-                    // var_dump($reiksmes);
-
-
-                    $sql = "UPDATE `kategorijos` SET `rodyti`= 0";
-                    $result = $conn->query($sql);
-        
-                    foreach ($reiksmes as $reiksme) {
-                        $sql = "UPDATE `kategorijos` SET `rodyti`= 1 WHERE ID=$reiksme";
-                        $result = $conn->query($sql);
-                    }
-                        // header('Location: admin.php');
-
-                        echo "<script type='text/javasscript'>window.top.location='admin.php';</script>";
-
+            $selected_value = mysqli_fetch_array($result);
+            
+            $checked = array("","");
+                
+                if($selected_value[0] == "nerodyti") {
+                    $checked[0] = "checked";
+                } else if ($selected_value[0] == "rodyti") {
+                    $checked[1] = "checked";
                 }
             
             ?>
 
 
+            <input  type="radio" name="show_dropdown" value="nerodyti" <?php echo $checked[0]; ?> > Nerodyti kategorijų dropdown</br>
+            <input  type="radio" name="show_dropdown" value="rodyti" <?php echo $checked[1]; ?> > Rodyti kategorijų dropdown</br>
+            <input class="btn btn-primary" type="submit" name="submit2" value="Išsaugoti">
+        </form>
+        
+        <?php
+        if(isset($_GET["submit2"])) {
+            $show_dropdown = $_GET["show_dropdown"]; // nerodyti /arba rodyt
 
+                $sql = "UPDATE `nustatymai` SET `reiksme`='$show_dropdown' WHERE ID = 3";
+                $result = $conn->query($sql);
+
+                if($result) {
+                    echo "Nustatymas pakeistas sėkmingai";
+                    // Redirect("admin.php");
+                    // header("Location: admin.php");
+                    echo "<script type='text/javascript'>window.top.location='admin.php';</script>";
+                } else {
+                    echo "Kažkas įvyko negerai";
+                }
+        }
+         
+         
+        ?>
+        
+    </div>
 </body>
 </html>
 
