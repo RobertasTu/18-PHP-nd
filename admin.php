@@ -73,7 +73,7 @@
 
             if($result) {
                 echo "Nustatymas pakeistas sėkmingai";
-                header("Location: admin.php");
+                echo "<script type='text/javascript'>window.top.location='admin.php';</script>";
             } else {
                 echo "Kažkas įvyko negerai";
             }
